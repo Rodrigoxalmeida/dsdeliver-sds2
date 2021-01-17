@@ -1,24 +1,34 @@
-import { useFonts, OpenSans_400Regular,OpenSans_700Bold } from '@expo-google-fonts/open-sans';
+import { useFonts, OpenSans_400Regular, OpenSans_700Bold } from '@expo-google-fonts/open-sans';
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import AppLoading from 'expo-app-loading';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 
 function Header() {
-  
-    let [fontsLoaded] = useFonts({
-      OpenSans_400Regular,
-      OpenSans_700Bold
-    });
-  
-    if (!fontsLoaded) {
-      return <AppLoading />;
+
+  const navigation = useNavigation();
+
+    const handleOnPress = () => {
+        navigation.navigate('Home');
     }
     
+  let [fontsLoaded] = useFonts({
+    OpenSans_400Regular,
+    OpenSans_700Bold
+  });
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
+
   return (
-    <View style={styles.container}>
-      <Image source={require('../assets/logo.png')}/>      
-      <Text style={styles.text}>DS Delivery</Text>      
-    </View>
+    <TouchableWithoutFeedback onPress={handleOnPress}>
+      <View style={styles.container}>
+        <Image source={require('../assets/logo.png')} />
+        <Text style={styles.text}>DS Delivery</Text>
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 
@@ -35,7 +45,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 25,
     letterSpacing: -0.24,
-    color:'#FFF',
+    color: '#FFF',
     marginLeft: 15,
     fontFamily: 'OpenSans_700Bold'
   }

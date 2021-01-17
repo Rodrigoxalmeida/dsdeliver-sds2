@@ -3,8 +3,16 @@ import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import AppLoading from 'expo-app-loading';
 import { RectButton } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
+import Header from '../Header';
 
 function Home() {
+
+    const navigation = useNavigation();
+
+    const handleOnPress = () => {
+        navigation.navigate('Orders');
+    }
 
     let [fontsLoaded] = useFonts({
         OpenSans_400Regular,
@@ -13,14 +21,11 @@ function Home() {
 
     if (!fontsLoaded) {
         return <AppLoading />;
-    }
-
-    const handleOnPress = () => {
-
-    }
+    }   
 
     return (
         <>
+            <Header/>
             <View style={styles.container}>
                 <Image source={require('../assets/deliveryman.png')} />
                 <Text style={styles.title}>Acompanhe os pedidos e {'\n'} entregue no prazo!</Text>
